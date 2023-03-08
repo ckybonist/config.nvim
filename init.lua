@@ -62,6 +62,7 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
+local navic = require('nvim-navic')
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -124,9 +125,22 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
+      },
+      sections = {
+        lualine_c = {
+          {
+            'filename',
+            path = 1,
+          },
+        },
+      },
+      winbar = {
+        lualine_c = {
+          { navic.get_location, cond = navic.is_available },
+        },
       },
     },
   },
@@ -356,7 +370,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagn
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -397,6 +411,8 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  require('nvim-navic').attach(client, bufnr)
 end
 
 -- Enable the following language servers
