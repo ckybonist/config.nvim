@@ -424,8 +424,13 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  rust_analyzer = {},
+
+  solargraph = {
+    formatting = false,
+  },
+
+  tsserver = {},
 
   lua_ls = {
     Lua = {
