@@ -6,7 +6,7 @@ return {
     local term = require('harpoon.term')
     local opts = { noremap = true, silent = true }
 
-    vim.keymap.set('n', '<leader>a', function()
+    vim.keymap.set('n', '<leader>ha', function()
       mark.add_file()
     end, opts)
     vim.keymap.set('n', '<C-e>', function()
