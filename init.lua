@@ -306,7 +306,14 @@ require('nvim-treesitter.configs').setup {
   auto_install = false,
 
   highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
+  indent = {
+    enable = true,
+    disable = {
+      'python',
+      -- IMPORTANT: workaround for line will left ident when typing dot
+      'ruby',
+    }
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -425,13 +432,10 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   rust_analyzer = {},
-
   solargraph = {
     formatting = false,
   },
-
   tsserver = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
