@@ -1,3 +1,4 @@
+-- TODO: add keymap description
 return {
   'ThePrimeagen/harpoon',
   config = function ()
