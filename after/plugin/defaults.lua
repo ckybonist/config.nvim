@@ -139,3 +139,9 @@ for _, group in ipairs(groups) do
   vim.api.nvim_set_hl(0, group, { bg = 'none' })
 end
 
+-- folding
+vim.cmd([[
+  setlocal foldmethod=indent
+  set nofoldenable
+  set foldlevel=99
+]])
