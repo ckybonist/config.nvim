@@ -1,6 +1,6 @@
 return {
   'rose-pine/neovim',
-  config = function ()
+  config = function()
     vim.cmd.colorscheme('rose-pine')
-  end
+  end,
 }

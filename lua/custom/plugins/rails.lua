@@ -1,5 +1,5 @@
 return {
-  "tpope/vim-rails",
+  'tpope/vim-rails',
   config = function()
     local create_command = vim.api.nvim_create_user_command
     create_command('Eroutes', 'Einitializer', {})
@@ -58,5 +58,5 @@ return {
         -- rubyHelper = 'factory sequence',
       },
     }
-  end
+  end,
 }

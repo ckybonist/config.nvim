@@ -1,8 +1,8 @@
 return {
-  "windwp/nvim-autopairs",
+  'windwp/nvim-autopairs',
   config = function()
-    local npairs = require("nvim-autopairs")
-    npairs.setup {}
-    npairs.add_rules(require("nvim-autopairs.rules.endwise-ruby"))
+    local npairs = require('nvim-autopairs')
+    npairs.setup({})
+    npairs.add_rules(require('nvim-autopairs.rules.endwise-ruby'))
   end,
 }

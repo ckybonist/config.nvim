@@ -6,5 +6,5 @@ return {
     vim.g['test#strategy'] = 'toggleterm'
     vim.g['test#ruby#rspec#executable'] = 'rspec'
     vim.g['test#neovim#term_position'] = 'bot 25'
-  end
+  end,
 }

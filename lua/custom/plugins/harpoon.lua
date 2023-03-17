@@ -1,7 +1,7 @@
 -- TODO: add keymap description
 return {
   'ThePrimeagen/harpoon',
-  config = function ()
+  config = function()
     local mark = require('harpoon.mark')
     local ui = require('harpoon.ui')
     local term = require('harpoon.term')
@@ -29,5 +29,5 @@ return {
     vim.keymap.set('n', '<leader>ta', function()
       term.gotoTerminal(1)
     end, opts)
-  end
+  end,
 }

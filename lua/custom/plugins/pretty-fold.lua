@@ -1,6 +1,6 @@
 return {
   'anuvyklack/pretty-fold.nvim',
-  config = function ()
+  config = function()
     require('pretty-fold').setup()
-  end
+  end,
 }
