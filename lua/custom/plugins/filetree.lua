@@ -30,7 +30,7 @@ return {
     vim.keymap.set('n', '<leader>p', function()
       local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
       vim.api.nvim_set_current_win(picked_window_id)
-    end, { desc = 'Pick a window' })
+    end, { desc = '[P]ick a window' })
 
     require('neo-tree').setup({})
 
