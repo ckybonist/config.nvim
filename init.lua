@@ -41,6 +41,12 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Utils
+function KeymapOpts(otherOpts)
+  local opts = { noremap = true, silent = true }
+  return vim.tbl_extend('keep', opts, otherOpts)
+end
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
