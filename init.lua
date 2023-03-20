@@ -123,7 +123,7 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       require('onedark').setup({
-        transparent = true
+        transparent = true,
       })
       vim.cmd.colorscheme('onedark')
     end,
