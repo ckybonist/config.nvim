@@ -34,6 +34,7 @@ return {
 
     require('neo-tree').setup({
       window = {
+        -- Mappings for copy file path: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/597
         mappings = {
           ['Y'] = function(state)
             -- Copy absolute path
