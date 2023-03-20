@@ -32,7 +32,29 @@ return {
       vim.api.nvim_set_current_win(picked_window_id)
     end, { desc = '[P]ick a window' })
 
-    require('neo-tree').setup({})
+    require('neo-tree').setup({
+      window = {
+        mappings = {
+          ['Y'] = function(state)
+            -- Copy absolute path
+            local node = state.tree:get_node()
+            local content = node.path
+            vim.fn.setreg('"', content)
+            vim.fn.setreg('1', content)
+            vim.fn.setreg('+', content)
+          end,
+
+          ['<leader>y'] = function(state)
+            -- Copy relative path
+            local node = state.tree:get_node()
+            local content = node.path:gsub(state.path, ''):sub(2)
+            vim.fn.setreg('"', content)
+            vim.fn.setreg('1', content)
+            vim.fn.setreg('+', content)
+          end,
+        },
+      },
+    })
 
     vim.cmd([[nnoremap \ :NeoTreeRevealToggle<cr>]])
   end,
