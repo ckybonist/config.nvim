@@ -274,6 +274,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+
+function vim.getVisualSelection()
+  -- https://github.com/nvim-telescope/telescope.nvim/issues/1923#issuecomment-1122642431
+  vim.cmd('noau normal! "vy"')
+  local text = vim.fn.getreg('v')
+  vim.fn.setreg('v', {})
+
+  text = string.gsub(text, '\n', '')
+  if #text > 0 then
+    return text
+  else
+    return ''
+  end
+end
+
 require('telescope').setup({
   defaults = {
     mappings = {
@@ -302,6 +317,10 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('v', '<leader>sw', function()
+  local text = vim.getVisualSelection()
+  require('telescope.builtin').grep_string({ default_text = text })
+end, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
@@ -310,10 +329,8 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'ruby', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim' },
-
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
-
   highlight = { enable = true },
   indent = {
     enable = true,
