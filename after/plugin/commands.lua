@@ -7,7 +7,7 @@ create_command('Gbackend', function()
     type_filter = 'backend',
   })
 end, {})
-vim.keymap.set('n', '<leader>fb', vim.cmd.Gbackend, KeymapOpts({ desc = '[F]ind [B]ackend code'}))
+vim.keymap.set('n', '<leader>fb', vim.cmd.Gbackend, KeymapOpts({ desc = '[F]ind [B]ackend code' }))
 
 create_command('Grspec', function()
   telescope_builtin['live_grep']({
@@ -15,14 +15,14 @@ create_command('Grspec', function()
     type_filter = 'backend',
   })
 end, {})
-vim.keymap.set('n', '<leader>fsp', vim.cmd.Grspec, KeymapOpts({ desc = '[F]ind [S][P]ec'}))
+vim.keymap.set('n', '<leader>fsp', vim.cmd.Grspec, KeymapOpts({ desc = '[F]ind [S][P]ec' }))
 
 create_command('Gjs', function()
   telescope_builtin['live_grep']({
     type_filter = 'ecmascript',
   })
 end, {})
-vim.keymap.set('n', '<leader>fjs', vim.cmd.Gjs, KeymapOpts({ desc = '[F]ind [J][S] code'}))
+vim.keymap.set('n', '<leader>fjs', vim.cmd.Gjs, KeymapOpts({ desc = '[F]ind [J][S] code' }))
 
 create_command('LspDefinition', function()
   vim.lsp.buf.definition()
