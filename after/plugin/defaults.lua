@@ -65,7 +65,6 @@ set.scrolloff = 8
 -- Use mouse to select and resize windows, etc.
 set.mouse = 'nic' -- Enable mouse in several mode
 set.mousemodel = 'popup' -- Set the behaviour of mouse
-
 -- Fileformats to use for new files
 set.fileformats = { 'unix', 'dos' }
 
@@ -127,6 +126,8 @@ if Exists('&termguicolors') and Exists('&winblend') then
   set.wildoptions = 'pum'
   set.pumblend = 5
   set.background = 'dark'
+
+  vim.cmd.colorscheme('onedark')
 end
 
 -- Transparent background
