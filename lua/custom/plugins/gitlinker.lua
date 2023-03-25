@@ -4,19 +4,16 @@ return {
     'nvim-lua/plenary.nvim',
   },
   config = function()
-    require('gitlinker').setup()
+    local gitlinker = require('gitlinker')
 
-    vim.api.nvim_set_keymap(
-      'n',
-      '<leader>gl',
-      '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-      { silent = true }
-    )
-    vim.api.nvim_set_keymap(
-      'v',
-      '<leader>gl',
-      '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-      {}
-    )
+    gitlinker.setup()
+
+    vim.keymap.set('n', '<leader>gl', function()
+      gitlinker.get_buf_range_url('n', { action_callback = require('gitlinker.actions').open_in_browser })
+    end, { silent = true })
+
+    vim.keymap.set('v', '<leader>gl', function()
+      gitlinker.get_buf_range_url('v', { action_callback = require('gitlinker.actions').open_in_browser })
+    end, {})
   end,
 }
