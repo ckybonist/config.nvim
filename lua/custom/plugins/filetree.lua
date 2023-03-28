@@ -57,6 +57,6 @@ return {
       },
     })
 
-    vim.cmd([[nnoremap \ :NeoTreeRevealToggle<cr>]])
+    vim.keymap.set('n', '<c-\\>', vim.cmd.NeoTreeRevealToggle, KeymapOpts({ desc = 'Toggle File Tree' }))
   end,
 }
