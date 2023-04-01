@@ -16,7 +16,7 @@ return {
       ui.nav_file(1)
     end, KeymapOpts({ desc = 'Harpoon: navigate to entry 1' }))
 
-    vim.keymap.set('n', '<C-t>', function()
+    vim.keymap.set('n', '<C-u>', function()
       ui.nav_file(2)
     end, KeymapOpts({ desc = 'Harpoon: navigate to entry 2' }))
 
