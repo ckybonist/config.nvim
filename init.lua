@@ -41,6 +41,12 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- It is strongly advised to eagerly disable netrw, due to race conditions at vim
+-- startup.
+-- Set the following at the very beginning of your `init.lua` / `init.vim`:  
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Utils
 function KeymapOpts(otherOpts)
   local opts = { noremap = true, silent = true }

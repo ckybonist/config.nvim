@@ -1,62 +1,23 @@
 return {
-  'nvim-neo-tree/neo-tree.nvim',
-  version = '*',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-    'MunifTanjim/nui.nvim',
-    's1n7ax/nvim-window-picker',
-  },
+  'nvim-tree/nvim-tree.lua',
   config = function()
-    -- Unless you are still migrating, remove the deprecated commands from v1.x
-    vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
-    local picker = require('window-picker')
-    picker.setup({
-      autoselect_one = true,
-      include_current = false,
-      filter_rules = {
-        -- filter using buffer options
-        bo = {
-          -- if the file type is one of following, the window will be ignored
-          filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
-
-          -- if the buffer type is one of following, the window will be ignored
-          buftype = { 'terminal', 'quickfix' },
-        },
-      },
-      other_win_hl_color = '#e35e4f',
-    })
-    vim.keymap.set('n', '<leader>p', function()
-      local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
-      vim.api.nvim_set_current_win(picked_window_id)
-    end, { desc = '[P]ick a window' })
-
-    require('neo-tree').setup({
-      window = {
-        -- Mappings for copy file path: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/597
+    require('nvim-tree').setup({
+      -- sort_by = "case_sensitive",
+      view = {
+        adaptive_size = true,
         mappings = {
-          ['Y'] = function(state)
-            -- Copy absolute path
-            local node = state.tree:get_node()
-            local content = node.path
-            vim.fn.setreg('"', content)
-            vim.fn.setreg('1', content)
-            vim.fn.setreg('+', content)
-          end,
-
-          ['<leader>y'] = function(state)
-            -- Copy relative path
-            local node = state.tree:get_node()
-            local content = node.path:gsub(state.path, ''):sub(2)
-            vim.fn.setreg('"', content)
-            vim.fn.setreg('1', content)
-            vim.fn.setreg('+', content)
-          end,
+          list = { { key = 'u', action = 'dir_up' } },
         },
+        float = { enable = false },
       },
+      renderer = { group_empty = true },
+      filters = { dotfiles = true },
+      respect_buf_cwd = true,
+      sync_root_with_cwd = true,
+      update_focused_file = { enable = true, update_root = true },
     })
 
-    vim.keymap.set('n', '<c-\\>', vim.cmd.NeoTreeRevealToggle, KeymapOpts({ desc = 'Toggle File Tree' }))
-  end,
+    vim.keymap.set('n', '<C-\\>', '<cmd>NvimTreeToggle<CR>', KeymapOpts({ desc = 'Toggle Filetree' }))
+    vim.keymap.set('n', '`f', '<cmd>NvimTreeFocus<CR>', KeymapOpts({ desc = 'Focus on Filetree' }))
+  end
 }
