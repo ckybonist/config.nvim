@@ -126,8 +126,6 @@ if Exists('&termguicolors') and Exists('&winblend') then
   set.wildoptions = 'pum'
   set.pumblend = 5
   set.background = 'dark'
-
-  vim.cmd.colorscheme('onedark')
 end
 
 -- Transparent background
