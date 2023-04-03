@@ -19,7 +19,6 @@ Kickstart.nvim is a template for your own configuration.
 
   And then you can explore or search through `:help lua-guide`
 
-
 Kickstart Guide:
 
 I have left several `:help X` comments throughout the init.lua
@@ -44,7 +43,7 @@ vim.g.maplocalleader = ' '
 
 -- It is strongly advised to eagerly disable netrw, due to race conditions at vim
 -- startup.
--- Set the following at the very beginning of your `init.lua` / `init.vim`:  
+-- Set the following at the very beginning of your `init.lua` / `init.vim`:
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -410,7 +409,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 vim.diagnostic.config({
-  virtual_text = true
+  virtual_text = true,
 })
 
 -- LSP settings.
@@ -459,6 +458,33 @@ local on_attach = function(client, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 
   require('nvim-navic').attach(client, bufnr)
+
+  -- Highlight symbol under cursor
+  -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#highlight-symbol-under-cursor#
+  if client.server_capabilities.documentHighlightProvider then
+    vim.cmd([[
+      hi! LspReferenceRead cterm=bold ctermbg=red guibg=#5A5A5A
+      hi! LspReferenceText cterm=bold ctermbg=red guibg=#5A5A5A
+      hi! LspReferenceWrite cterm=bold ctermbg=red guibg=#5A5A5A
+    ]])
+    vim.api.nvim_create_augroup('lsp_document_highlight', {
+      clear = false,
+    })
+    vim.api.nvim_clear_autocmds({
+      buffer = bufnr,
+      group = 'lsp_document_highlight',
+    })
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = 'lsp_document_highlight',
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+      group = 'lsp_document_highlight',
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
 end
 
 -- Enable the following language servers
@@ -533,7 +559,7 @@ cmp.setup({
     }),
     ['<C-e>'] = cmp.mapping.abort(),
     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<C-y>'] = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehavior.Insert, select = true }), 
+    ['<C-y>'] = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehavior.Insert, select = true }),
   }),
   sources = {
     { name = 'nvim_lsp' },

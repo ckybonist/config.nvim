@@ -9,5 +9,5 @@ return {
     --     dark_sidebar = false,
     --   }
     -- )
-  end
+  end,
 }

@@ -19,5 +19,5 @@ return {
 
     vim.keymap.set('n', '<C-\\>', '<cmd>NvimTreeToggle<CR>', KeymapOpts({ desc = 'Toggle Filetree' }))
     vim.keymap.set('n', '`f', '<cmd>NvimTreeFocus<CR>', KeymapOpts({ desc = 'Focus on Filetree' }))
-  end
+  end,
 }
