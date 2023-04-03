@@ -175,6 +175,7 @@ require('lazy').setup({
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'otavioschwanck/telescope-alternate' },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -306,8 +307,47 @@ require('telescope').setup({
   },
 })
 
+require('telescope-alternate').setup({
+  mappings = {
+    { 'app/**/*.rb', { { 'spec/[1].rb', 'Test' } } },
+    {
+      'app/models/(.*).rb',
+      {
+        { 'db/helpers/**/*[1:pluralize]*.rb', 'Helper' },
+        { 'app/controllers/**/*[1:pluralize]_controller.rb', 'Controller' },
+        { 'app/graphql/object_type_white_list.rb', 'GQL Types' },
+        { 'app/graphql/types/query_type.rb', 'GQL Types' },
+        { 'app/graphql/types/[1]*_(type|interface|enum).rb', 'GQL Types' },
+        { 'app/graphql/mutations/[1]/*.rb', 'GQL Mutation' },
+        { 'app/graphql/mutations/*[1].rb', 'GQL Mutation' },
+        { 'app/api/grape_api/abilities/[1].rb', 'Grape API' },
+        { 'app/api/grape_api/entities/**/[1].rb', 'Grape API' },
+        { 'app/api/grape_api/helpers/[1].rb', 'Grape API' },
+        { 'app/api/grape_api/v1/**/[1]*.rb', 'Grape API' },
+      },
+    },
+    {
+      'app/services/(.*)/(.*)_service.rb',
+      {
+        { 'app/models/**/*[1].rb', 'Model' },
+        { 'app/controllers/**/*[2:pluralize]_controller.rb', 'Controller' },
+        { 'app/graphql/object_type_white_list.rb', 'GQL Types' },
+        { 'app/graphql/types/query_type.rb', 'GQL Types' },
+        { 'app/graphql/types/*[2]*_type.rb', 'GQL Types' },
+        { 'app/graphql/mutations/[2]/*.rb', 'GQL Mutation' },
+        { 'app/graphql/mutations/*[2].rb', 'GQL Mutation' },
+      },
+    },
+  },
+  presets = { 'rails', 'rspec' },
+})
+vim.keymap.set('n', '<leader>sa', function()
+  vim.cmd('Telescope telescope-alternate alternate_file')
+end, KeymapOpts({ desc = '[S]earch [A]lternate files' }))
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'telescope-alternate')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
