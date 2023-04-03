@@ -133,11 +133,14 @@ end
 local groups = {
   'Normal',
   'NormalFloat',
+  'FloatBorder',
   'NormalNC',
 }
 for _, group in ipairs(groups) do
   vim.api.nvim_set_hl(0, group, { bg = 'none' })
 end
+
+vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#B04BD0' })
 
 -- folding
 vim.cmd([[
