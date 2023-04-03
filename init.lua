@@ -452,6 +452,13 @@ vim.diagnostic.config({
   virtual_text = true,
 })
 
+-- Set border for LSP floating window
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts)
+  opts.border = 'rounded'
+  return orig_util_open_floating_preview(contents, syntax, opts)
+end
+
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
