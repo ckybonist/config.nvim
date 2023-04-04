@@ -375,7 +375,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'ruby', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim' },
+  ensure_installed = { 'go', 'lua', 'ruby', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'graphql' },
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
   highlight = { enable = true },
@@ -554,6 +554,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  graphql = {},
 }
 
 -- Setup neovim lua configuration
