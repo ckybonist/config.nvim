@@ -24,6 +24,10 @@ create_command('Gjs', function()
 end, {})
 vim.keymap.set('n', '<leader>fjs', vim.cmd.Gjs, KeymapOpts({ desc = '[F]ind [J][S] code' }))
 
-create_command('LspDefinition', function()
-  vim.lsp.buf.definition()
-end, {})
+create_command('NLFormat', function()
+  vim.lsp.buf.format({ async = true })
+end, { desc = '[null-ls] Formatting' })
+
+create_command('NLCodeAction', function()
+  vim.lsp.buf.code_action()
+end, { desc = '[null-ls] Code Actions' })

@@ -103,6 +103,34 @@ require('lazy').setup({
     },
   },
 
+  {
+    'jay-babu/mason-null-ls.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      'williamboman/mason.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
+    },
+    config = function()
+      local null_ls = require('null-ls')
+      require('mason').setup()
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.code_actions.eslint,
+          null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.code_actions.shellcheck,
+          null_ls.builtins.code_actions.gitsigns,
+        },
+      })
+      require('mason-null-ls').setup({
+        ensure_installed = {},
+        automatic_installation = true,
+        automatic_setup = false,
+      })
+    end,
+  },
+
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
@@ -121,7 +149,40 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      preview_config = { border = 'rounded' },
     },
+    config = function()
+      local gitsigns = require('gitsigns')
+      gitsigns.setup({
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          local next_hunk = function()
+            if vim.wo.diff then
+              return ']c'
+            end
+
+            vim.schedule(function()
+              gs.next_hunk()
+            end)
+            return '<Ignore>'
+          end
+          local prev_hunk = function()
+            if vim.wo.diff then
+              return '[c'
+            end
+
+            vim.schedule(function()
+              gs.prev_hunk()
+            end)
+            return '<Ignore>'
+          end
+
+          vim.keymap.set('n', ']c', next_hunk, KeymapOpts({ expr = true, desc = 'Jump to Next Hunk' }))
+          vim.keymap.set('n', '[c', prev_hunk, KeymapOpts({ expr = true, desc = 'Jump to Previous Hunk' }))
+        end,
+      })
+    end,
   },
 
   { -- Theme inspired by Atom
@@ -501,7 +562,7 @@ local on_attach = function(client, bufnr)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
+    vim.lsp.buf.format({ async = true })
   end, { desc = 'Format current buffer with LSP' })
 
   require('nvim-navic').attach(client, bufnr)
