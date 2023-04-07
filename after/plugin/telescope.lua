@@ -15,7 +15,6 @@ function vim.getVisualSelection()
   end
 end
 
-
 require('telescope').setup({
   defaults = {
     mappings = {
