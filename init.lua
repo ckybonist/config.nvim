@@ -1,3 +1,38 @@
+-- Utils
+function WordUnderCursor()
+  return vim.fn.expand("<cword>")
+end
+
+function KeymapOpts(otherOpts)
+  local opts = { noremap = true, silent = true }
+  return vim.tbl_extend('keep', opts, otherOpts)
+end
+
+function Set(list)
+  local set = {}
+  for _, e in ipairs(list) do
+    set[e] = true
+  end
+
+  return set
+end
+
+function VimHas(key)
+  if vim.fn.has(key) == 1 then
+    return true
+  else
+    return false
+  end
+end
+
+function Exists(key)
+  if vim.fn.exists(key) == 1 then
+    return true
+  else
+    return false
+  end
+end
+
 --[[
 
 =====================================================================
@@ -40,6 +75,12 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.is_win = VimHas('win32') or VimHas('win64')
+vim.g.is_linux = VimHas('unix') and (not VimHas('macunix'))
+vim.g.is_mac = VimHas('macunix')
+
+-- Use filetype.lua, but fallback to filetype.vim
+vim.g.do_filetype_lua = 1
 
 -- It is strongly advised to eagerly disable netrw, due to race conditions at vim
 -- startup.
@@ -47,16 +88,6 @@ vim.g.maplocalleader = ' '
 -- Workaround: temporarily let fugitive's GBrowse working
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
-
--- Utils
-function WordUnderCursor()
-  return vim.fn.expand("<cword>")
-end
-
-function KeymapOpts(otherOpts)
-  local opts = { noremap = true, silent = true }
-  return vim.tbl_extend('keep', opts, otherOpts)
-end
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim

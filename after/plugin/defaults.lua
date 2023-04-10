@@ -1,26 +1,3 @@
-function VimHas(key)
-  if vim.fn.has(key) == 1 then
-    return true
-  else
-    return false
-  end
-end
-
-function Exists(key)
-  if vim.fn.exists(key) == 1 then
-    return true
-  else
-    return false
-  end
-end
-
-vim.g.is_win = VimHas('win32') or VimHas('win64')
-vim.g.is_linux = VimHas('unix') and (not VimHas('macunix'))
-vim.g.is_mac = VimHas('macunix')
-
--- Use filetype.lua, but fallback to filetype.vim
-vim.g.do_filetype_lua = 1
-
 local set = vim.opt
 
 vim.cmd([[
@@ -79,7 +56,7 @@ set.list = true
 set.listchars = {
   -- space = '⋅',
   -- eol = '↩',
-  -- tab = '▸ ',
+  tab = '▸ ',
   -- trail = '~',
   -- extends = '❯',
   -- precedes = '❮',
@@ -113,34 +90,6 @@ set.clipboard:append('unnamedplus')
 
 -- incremental substitution (neovim)
 set.inccommand = 'split'
-
---- UI
-set.lazyredraw = true
-set.guifont = 'FuraCode Nerd Font Mono:h14'
-
-if Exists('&termguicolors') and Exists('&winblend') then
-  vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
-
-  set.termguicolors = true
-  set.winblend = 0
-  set.wildoptions = 'pum'
-  set.pumblend = 5
-  set.background = 'dark'
-  vim.cmd.colorscheme('onedark')
-end
-
--- Transparent background
-local groups = {
-  'Normal',
-  'NormalFloat',
-  'FloatBorder',
-  'NormalNC',
-}
-for _, group in ipairs(groups) do
-  vim.api.nvim_set_hl(0, group, { bg = 'none' })
-end
-
-vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#B04BD0' })
 
 -- folding
 vim.cmd([[
