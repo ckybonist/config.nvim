@@ -22,7 +22,7 @@ local transparent_deny_set = Set({
   'solarized8_low',
 })
 local current_colorscheme = vim.g.colors_name
-if not(transparent_deny_set[current_colorscheme]) then
+if not transparent_deny_set[current_colorscheme] then
   local groups = {
     'Normal',
     'NormalFloat',
@@ -35,4 +35,3 @@ if not(transparent_deny_set[current_colorscheme]) then
 end
 
 vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#B04BD0' })
-
