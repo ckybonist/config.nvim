@@ -217,8 +217,18 @@ require('lazy').setup({
             return '<Ignore>'
           end
 
-          vim.keymap.set('n', ']c', next_hunk, KeymapOpts({ expr = true, desc = 'Jump to Next Hunk' }))
-          vim.keymap.set('n', '[c', prev_hunk, KeymapOpts({ expr = true, desc = 'Jump to Previous Hunk' }))
+          vim.keymap.set('n', ']c', next_hunk, KeymapOpts({ expr = true, desc = 'Git: Jump to Next Hunk' }))
+          vim.keymap.set('n', '[c', prev_hunk, KeymapOpts({ expr = true, desc = 'Git: Jump to Previous Hunk' }))
+          vim.keymap.set('n', '<leader>hS', gs.stage_buffer, KeymapOpts({ desc = 'Git: [S]tage Buffer' }))
+          vim.keymap.set({ 'n', 'v' }, '<leader>hs', gs.stage_hunk, KeymapOpts({ desc = 'Git: [S]tage Hunk' }))
+          vim.keymap.set({ 'n', 'v' }, '<leader>hr', gs.reset_hunk, KeymapOpts({ desc = 'Git: [R]eset Hunk' }))
+          vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk, KeymapOpts({ desc = 'Git: [U]ndo Stage Hunk' }))
+          vim.keymap.set('n', '<leader>hp', gs.preview_hunk, KeymapOpts({ desc = 'Git: [P]review Hunk' }))
+          vim.keymap.set('n', '<leader>hd', gs.diffthis, KeymapOpts({ desc = 'Git: [D]iff This' }))
+          vim.keymap.set('n', '<leader>hD', function()
+            gs.diffthis('~')
+          end, KeymapOpts({ desc = 'Git: [D]iff This' }))
+          vim.keymap.set('n', '<leader>htd', gs.toggle_deleted, KeymapOpts({ desc = 'Git: [T]oggle [D]eleted' }))
         end,
       })
     end,
