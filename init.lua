@@ -110,7 +110,7 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
-local navic = require('nvim-navic')
+
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -264,9 +264,17 @@ require('lazy').setup({
           },
         },
       },
+      -- FIXME: symbol info winbar not appear?
       winbar = {
         lualine_c = {
-          { navic.get_location, cond = navic.is_available },
+          {
+            function()
+              require('nvim-navic').get_location()
+            end,
+            cond = function()
+              require('nvim-navic').is_available()
+            end,
+          },
         },
       },
     },
