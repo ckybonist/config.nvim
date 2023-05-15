@@ -28,6 +28,6 @@ return {
       },
     })
 
-    vim.keymap.set('n', '<leader>bp', ':BufferLinePick<CR>', KeymapOpts({ desc = '[B]uffer [P]ick' }))
+    vim.keymap.set('n', '\\', ':BufferLinePick<CR>', KeymapOpts({ desc = '[B]uffer [P]ick' }))
   end,
 }

@@ -3,7 +3,7 @@ return {
   config = function()
     require('toggleterm').setup({
       size = 20,
-      open_mapping = [[\]],
+      open_mapping = '`t',
       insert_mappings = false, -- prevent trigger keymap in INSERT mode
       direction = 'horizontal',
       float_opts = { border = 'rounded' },
