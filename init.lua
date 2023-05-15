@@ -693,9 +693,6 @@ cmp.setup({
 })
 
 -- nvim-cmp setup
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-
 luasnip.config.setup({})
 
 cmp.setup({
