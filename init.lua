@@ -137,6 +137,14 @@ require('lazy').setup({
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
+
+      {
+        'SmiteshP/nvim-navbuddy',
+        dependencies = {
+          'MunifTanjim/nui.nvim',
+        },
+        opts = { lsp = { auto_attach = true } },
+      },
     },
   },
 
@@ -261,19 +269,6 @@ require('lazy').setup({
           {
             'filename',
             path = 1,
-          },
-        },
-      },
-      -- FIXME: symbol info winbar not appear?
-      winbar = {
-        lualine_c = {
-          {
-            function()
-              require('nvim-navic').get_location()
-            end,
-            cond = function()
-              require('nvim-navic').is_available()
-            end,
           },
         },
       },
@@ -573,8 +568,6 @@ local on_attach = function(client, bufnr)
     vim.lsp.buf.format({ async = true })
   end, { desc = 'Format current buffer with LSP' })
 
-  require('nvim-navic').attach(client, bufnr)
-
   -- Highlight symbol under cursor
   -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#highlight-symbol-under-cursor#
   if client.server_capabilities.documentHighlightProvider then
@@ -734,6 +727,13 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
+})
+
+local navbuddy = require('nvim-navbuddy')
+require('lspconfig').clangd.setup({
+  on_attach = function(client, bufnr)
+    navbuddy.attach(client, bufnr)
+  end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
