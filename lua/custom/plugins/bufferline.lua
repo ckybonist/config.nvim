@@ -16,13 +16,13 @@ return {
           icon = '▎', -- this should be omitted if indicator style is not 'icon'
           style = 'icon',
         },
-        separator_style = 'slope',
+        separator_style = 'thick',
         show_tab_indicators = true,
       },
       highlights = {
         buffer_selected = {
-          fg = '#cb4b16',
-          sp = '#cb4b16',
+          -- fg = '#cb4b16',
+          -- sp = '#cb4b16',
           bold = true,
         },
       },
