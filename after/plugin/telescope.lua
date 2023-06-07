@@ -30,7 +30,7 @@ require('telescope').setup({
         '~/bonio/PaGamO',
         '~/bonio/PaymentService',
         '~/bonio/operatings',
-        '~/golang/src/github.com/BonioTw/PaGamO-WebSocket-Go',
+        '~/golang/src/github.com/Bonio-Taiwan/PaGamO-WebSocket-Go',
         '~/.config/nvim',
       },
       -- https://github.com/nvim-telescope/telescope-project.nvim/issues/130
