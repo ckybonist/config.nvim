@@ -7,6 +7,11 @@ return {
 
     -- See rails-projections doc
     vim.g.rails_projections = {
+      ['app/services/*.rb'] = {
+        command = 'service',
+        test = 'app/services/%i.rb',
+        template = { 'class %S::%i\nend', 'module %S::%i\nend' },
+      },
       ['app/jobs/*.rb'] = {
         command = 'job',
         test = 'spec/jobs/%i_spec.rb',
