@@ -35,6 +35,12 @@ return {
         template = 'module Mutations\n  class %i < BaseMutation\n end\nend',
         -- rubyHelper = 'graphql_name global_id_field field argument',
       },
+      ['app/graphql/*_loader.rb'] = {
+        command = 'loader',
+        test = 'spec/graphql/%i_spec.rb',
+        template = 'class %i < GraphQL::Batch::Loader\n end',
+        -- rubyHelper = 'graphql_name global_id_field field argument',
+      },
       ['app/api/*.rb'] = {
         command = 'api',
         test = 'spec/api/grape_api/v1/%p_spec.rb',
