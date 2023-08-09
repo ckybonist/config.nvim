@@ -1,10 +1,11 @@
 local create_command = vim.api.nvim_create_user_command
 local telescope_builtin = require('telescope.builtin')
 
+-- type_filter's type defined in ripgreprc
 create_command('Gbackend', function()
   telescope_builtin['live_grep']({
     search_dirs = { 'app' },
-    type_filter = 'backend',
+    type_filter = 'backendRoR',
   })
 end, {})
 vim.keymap.set('n', '<leader>fb', vim.cmd.Gbackend, KeymapOpts({ desc = '[F]ind [B]ackend code' }))
@@ -12,7 +13,7 @@ vim.keymap.set('n', '<leader>fb', vim.cmd.Gbackend, KeymapOpts({ desc = '[F]ind 
 create_command('Grspec', function()
   telescope_builtin['live_grep']({
     search_dirs = { 'spec' },
-    type_filter = 'backend',
+    type_filter = 'backendRoR',
   })
 end, {})
 vim.keymap.set('n', '<leader>fsp', vim.cmd.Grspec, KeymapOpts({ desc = '[F]ind [S][P]ec' }))
