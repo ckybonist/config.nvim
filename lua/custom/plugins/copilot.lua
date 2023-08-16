@@ -1,7 +1,7 @@
 return {
   'github/copilot.vim',
   config = function()
-    vim.g.copilot_node_command = '~/.local/share/rtx/installs/node/20.2.0/bin/node'
+    vim.g.copilot_node_command = os.getenv('COPILOT_NODE_PATH')
     -- Prevent keymap conflicts
     vim.g.copilot_no_tab_map = true
     vim.cmd([[
