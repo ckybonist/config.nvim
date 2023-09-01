@@ -8,7 +8,7 @@ return {
       mark.add_file()
     end, KeymapOpts({ desc = '[H]arpoon [A]dd file' }))
 
-    vim.keymap.set('n', '<C-e>', function()
+    vim.keymap.set('n', '<leader>ht', function()
       ui.toggle_quick_menu()
     end, KeymapOpts({ desc = 'Harpoon: toggle quick menu' }))
 
@@ -16,7 +16,7 @@ return {
       ui.nav_file(1)
     end, KeymapOpts({ desc = 'Harpoon: navigate to entry 1' }))
 
-    vim.keymap.set('n', '<C-u>', function()
+    vim.keymap.set('n', '<C-l>', function()
       ui.nav_file(2)
     end, KeymapOpts({ desc = 'Harpoon: navigate to entry 2' }))
 

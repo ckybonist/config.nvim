@@ -5,7 +5,7 @@ return {
       size = 20,
       open_mapping = '`t',
       insert_mappings = false, -- prevent trigger keymap in INSERT mode
-      direction = 'horizontal',
+      direction = 'float',
       float_opts = { border = 'rounded' },
     })
 
