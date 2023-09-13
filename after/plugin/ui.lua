@@ -11,7 +11,8 @@ if Exists('&termguicolors') and Exists('&winblend') then
   set.wildoptions = 'pum'
   set.pumblend = 5
   set.background = 'dark'
-  vim.cmd.colorscheme('kanagawa')
+  -- vim.cmd.colorscheme('kanagawa')
+  vim.cmd.colorscheme('github_dark_high_contrast')
 end
 
 -- Transparent background
