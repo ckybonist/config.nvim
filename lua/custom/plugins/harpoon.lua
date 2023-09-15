@@ -8,7 +8,7 @@ return {
       mark.add_file()
     end, KeymapOpts({ desc = '[H]arpoon [A]dd file' }))
 
-    vim.keymap.set('n', '<leader>ht', function()
+    vim.keymap.set('n', '<leader>hq', function()
       ui.toggle_quick_menu()
     end, KeymapOpts({ desc = 'Harpoon: toggle quick menu' }))
 
