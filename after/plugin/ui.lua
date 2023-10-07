@@ -11,8 +11,9 @@ if Exists('&termguicolors') and Exists('&winblend') then
   set.wildoptions = 'pum'
   set.pumblend = 5
   set.background = 'dark'
-  vim.cmd.colorscheme('kanagawa')
-  -- vim.cmd.colorscheme('github_dark_high_contrast')
+  -- kanagawa
+  -- github_dark_high_contrast
+  vim.cmd.colorscheme('substrata')
 end
 
 -- Transparent background
@@ -24,6 +25,7 @@ local transparent_deny_set = Set({
   'github_dark',
   'onedark',
   'kanagawa',
+  'substrata',
 })
 local current_colorscheme = vim.g.colors_name
 if not transparent_deny_set[current_colorscheme] then
