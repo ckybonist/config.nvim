@@ -11,7 +11,8 @@ local gbrowse_sha_under_cursor = function()
 end
 vim.keymap.set(
   'n',
-  '<leader>gr',
+  '<leader>gc',
   gbrowse_sha_under_cursor,
-  KeymapOpts({ desc = '[G]it: Browse the Revision Under Cursor' })
+  KeymapOpts({ desc = '[G]it: Browse the Commit Under Cursor' })
 )
+vim.keymap.set('n', '<C-/>', ':Git blame<CR>', KeymapOpts({ desc = '[G]it: Browse the Commit Under Cursor' }))

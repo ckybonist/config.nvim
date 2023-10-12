@@ -102,7 +102,7 @@ return {
       update_focused_file = { enable = true, update_root = true },
     })
 
-    vim.keymap.set('n', '<C-\\>', '<cmd>NvimTreeToggle<CR>', KeymapOpts({ desc = 'Toggle Filetree' }))
+    vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', KeymapOpts({ desc = 'Toggle Filetree' }))
     vim.keymap.set('n', '`f', '<cmd>NvimTreeFocus<CR>', KeymapOpts({ desc = 'Focus on Filetree' }))
   end,
 }

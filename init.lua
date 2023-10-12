@@ -201,7 +201,7 @@ require('lazy').setup({
     config = function()
       local gitsigns = require('gitsigns')
       gitsigns.setup({
-        on_attach = function(bufnr)
+        on_attach = function()
           local gs = package.loaded.gitsigns
 
           local next_hunk = function()
@@ -228,15 +228,15 @@ require('lazy').setup({
           vim.keymap.set('n', ']c', next_hunk, KeymapOpts({ expr = true, desc = 'Git: Jump to Next Hunk' }))
           vim.keymap.set('n', '[c', prev_hunk, KeymapOpts({ expr = true, desc = 'Git: Jump to Previous Hunk' }))
           vim.keymap.set('n', '<leader>hS', gs.stage_buffer, KeymapOpts({ desc = 'Git: [S]tage Buffer' }))
-          vim.keymap.set({ 'n', 'v' }, '<leader>hs', gs.stage_hunk, KeymapOpts({ desc = 'Git: [S]tage Hunk' }))
-          vim.keymap.set({ 'n', 'v' }, '<leader>hr', gs.reset_hunk, KeymapOpts({ desc = 'Git: [R]eset Hunk' }))
-          vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk, KeymapOpts({ desc = 'Git: [U]ndo Stage Hunk' }))
-          vim.keymap.set('n', '<leader>hp', gs.preview_hunk, KeymapOpts({ desc = 'Git: [P]review Hunk' }))
-          vim.keymap.set('n', '<leader>hd', gs.diffthis, KeymapOpts({ desc = 'Git: [D]iff This' }))
-          vim.keymap.set('n', '<leader>hD', function()
+          vim.keymap.set({ 'n', 'v' }, '<leader>gs', gs.stage_hunk, KeymapOpts({ desc = 'Git: [S]tage Hunk' }))
+          vim.keymap.set({ 'n', 'v' }, '<leader>gr', gs.reset_hunk, KeymapOpts({ desc = 'Git: [R]eset Hunk' }))
+          vim.keymap.set('n', '<leader>gu', gs.undo_stage_hunk, KeymapOpts({ desc = 'Git: [U]ndo Stage Hunk' }))
+          vim.keymap.set('n', '<leader>gp', gs.preview_hunk, KeymapOpts({ desc = 'Git: [P]review Hunk' }))
+          vim.keymap.set('n', '<leader>gd', gs.diffthis, KeymapOpts({ desc = 'Git: [D]iff This' }))
+          vim.keymap.set('n', '<leader>gD', function()
             gs.diffthis('~')
           end, KeymapOpts({ desc = 'Git: [D]iff This' }))
-          vim.keymap.set('n', '<leader>htd', gs.toggle_deleted, KeymapOpts({ desc = 'Git: [T]oggle [D]eleted' }))
+          vim.keymap.set('n', '<leader>gtd', gs.toggle_deleted, KeymapOpts({ desc = 'Git: [T]oggle [D]eleted' }))
         end,
       })
     end,
@@ -546,15 +546,15 @@ local on_attach = function(client, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>lc', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('<leader>vrr', vim.lsp.buf.references, '[G]oto [R]eferences')
+  nmap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<leader>ld', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -569,9 +569,9 @@ local on_attach = function(client, bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()
     vim.lsp.buf.format({ async = true })
-  end, { desc = 'Format current buffer with LSP' })
+  end, { desc = 'Format current file by LSP' })
 
   -- Highlight symbol under cursor
   -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#highlight-symbol-under-cursor#
