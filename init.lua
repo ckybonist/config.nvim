@@ -227,9 +227,10 @@ require('lazy').setup({
 
           vim.keymap.set('n', ']c', next_hunk, KeymapOpts({ expr = true, desc = 'Git: Jump to Next Hunk' }))
           vim.keymap.set('n', '[c', prev_hunk, KeymapOpts({ expr = true, desc = 'Git: Jump to Previous Hunk' }))
-          vim.keymap.set('n', '<leader>hS', gs.stage_buffer, KeymapOpts({ desc = 'Git: [S]tage Buffer' }))
+          vim.keymap.set('n', '<leader>gs', gs.stage_buffer, KeymapOpts({ desc = 'Git: [S]tage Buffer' }))
           vim.keymap.set({ 'n', 'v' }, '<leader>gs', gs.stage_hunk, KeymapOpts({ desc = 'Git: [S]tage Hunk' }))
           vim.keymap.set({ 'n', 'v' }, '<leader>gr', gs.reset_hunk, KeymapOpts({ desc = 'Git: [R]eset Hunk' }))
+          vim.keymap.set({ 'n', 'v' }, '<leader>gb', gs.reset_buffer, KeymapOpts({ desc = 'Git: Reset [B]uffer' }))
           vim.keymap.set('n', '<leader>gu', gs.undo_stage_hunk, KeymapOpts({ desc = 'Git: [U]ndo Stage Hunk' }))
           vim.keymap.set('n', '<leader>gp', gs.preview_hunk, KeymapOpts({ desc = 'Git: [P]review Hunk' }))
           vim.keymap.set('n', '<leader>gd', gs.diffthis, KeymapOpts({ desc = 'Git: [D]iff This' }))
@@ -417,25 +418,33 @@ require('telescope').setup({
         ['<C-d>'] = false,
       },
     },
+    vertical = {
+      width = 0.8,
+      hight = 0.9,
+    },
   },
 })
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+local telescope_theme = require('telescope.themes')
+
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+  require('telescope.builtin').current_buffer_fuzzy_find(telescope_theme.get_dropdown({
     winblend = 10,
     previewer = false,
   }))
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sf', function()
+  require('telescope.builtin').find_files(telescope_theme.get_ivy({}))
+end, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
