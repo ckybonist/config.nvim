@@ -1,6 +1,5 @@
 return {
   'zbirenbaum/copilot-cmp',
-  event = 'InsertEnter',
   dependencies = { 'zbirenbaum/copilot.lua' },
   config = function()
     vim.defer_fn(function()
