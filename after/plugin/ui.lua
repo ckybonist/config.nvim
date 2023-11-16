@@ -14,31 +14,8 @@ if Exists('&termguicolors') and Exists('&winblend') then
   -- substrata
   -- kanagawa
   -- github_dark_high_contrast
-  vim.cmd.colorscheme('kanagawa')
-end
-
--- Transparent background
-local transparent_deny_set = Set({
-  'solarized8',
-  'solarized8_flat',
-  'solarized8_high',
-  'solarized8_low',
-  'github_dark',
-  'onedark',
-  'kanagawa',
-  'substrata',
-})
-local current_colorscheme = vim.g.colors_name
-if not transparent_deny_set[current_colorscheme] then
-  local groups = {
-    'Normal',
-    'NormalFloat',
-    'FloatBorder',
-    'NormalNC',
-  }
-  for _, group in ipairs(groups) do
-    vim.api.nvim_set_hl(0, group, { bg = 'none' })
-  end
+  -- vim.cmd.colorscheme('kanagawa')
+  vim.cmd.colorscheme('onenord')
 end
 
 vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#B04BD0' })

@@ -581,9 +581,9 @@ local on_attach = function(client, bufnr)
   -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#highlight-symbol-under-cursor#
   if client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
-      hi! LspReferenceRead cterm=bold ctermbg=red guibg=#5A5A5A
-      hi! LspReferenceText cterm=bold ctermbg=red guibg=#5A5A5A
-      hi! LspReferenceWrite cterm=bold ctermbg=red guibg=#5A5A5A
+      hi! LspReferenceRead cterm=bold gui=bold guibg=#34495E
+      hi! LspReferenceText cterm=bold gui=bold guibg=#34495E
+      hi! LspReferenceWrite cterm=bold gui=bold guibg=#34495E
     ]])
     vim.api.nvim_create_augroup('lsp_document_highlight', {
       clear = false,
