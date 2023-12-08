@@ -4,7 +4,7 @@ local telescope_builtin = require('telescope.builtin')
 -- type_filter's type defined in ripgreprc
 create_command('Gbackend', function()
   telescope_builtin['live_grep']({
-    search_dirs = { 'app' },
+    search_dirs = { 'app', 'config', 'lib', 'modules', 'spec' },
     type_filter = 'backendRoR',
   })
 end, {})
@@ -16,7 +16,6 @@ create_command('Grspec', function()
     type_filter = 'backendRoR',
   })
 end, {})
-vim.keymap.set('n', '<leader>fsp', vim.cmd.Grspec, KeymapOpts({ desc = '[F]ind [S][P]ec' }))
 
 create_command('Gjs', function()
   telescope_builtin['live_grep']({
