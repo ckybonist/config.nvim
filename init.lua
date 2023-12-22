@@ -235,8 +235,8 @@ require('lazy').setup({
           vim.keymap.set('n', '<leader>gp', gs.preview_hunk, KeymapOpts({ desc = 'Git: [P]review Hunk' }))
           vim.keymap.set('n', '<leader>gd', gs.diffthis, KeymapOpts({ desc = 'Git: [D]iff This' }))
           vim.keymap.set('n', '<leader>gD', function()
-            gs.diffthis('~')
-          end, KeymapOpts({ desc = 'Git: [D]iff This' }))
+            gs.diffthis('origin/develop')
+          end, KeymapOpts({ desc = 'Git: [D]iff This File with origin/develop' }))
           vim.keymap.set('n', '<leader>gtd', gs.toggle_deleted, KeymapOpts({ desc = 'Git: [T]oggle [D]eleted' }))
         end,
       })
