@@ -363,7 +363,7 @@ require('lazy').setup({
       notify_on_error = false,
       format_on_save = function(bufnr)
         -- Disable autoformat on certain filetypes
-        local ignore_filetypes = { 'rb', 'rake' }
+        local ignore_filetypes = { 'ruby' }
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
           return
         end
