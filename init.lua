@@ -693,17 +693,6 @@ require('lazy').setup({
       end, { desc = '[S]earch [/] in Open Files' })
     end,
   },
-  { 'otavioschwanck/telescope-alternate' },
-  { 'nvim-telescope/telescope-project.nvim' },
-  {
-    'nvim-telescope/telescope-file-browser.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-  },
-  {
-    'nvim-telescope/telescope-file-browser.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-  },
-
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
