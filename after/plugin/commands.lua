@@ -7,7 +7,7 @@ create_command('Gbackend', function()
   local opts = vim.tbl_extend(
     'keep',
     base_opts,
-    { search_dirs = { 'app', 'config', 'lib', 'modules', 'spec' }, type_filter = 'backendRoR' }
+    { search_dirs = { 'app', 'config', 'lib', 'modules' }, type_filter = 'backendRoR' }
   )
   ts.live_grep(require('telescope.themes').get_dropdown(opts))
 end, {})
