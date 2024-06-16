@@ -341,7 +341,6 @@ require('lazy').setup({
       require('mason').setup()
       null_ls.setup({
         sources = {
-          null_ls.builtins.code_actions.eslint,
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.diagnostics.shellcheck,
