@@ -16,8 +16,9 @@ if Exists('&termguicolors') and Exists('&winblend') then
   -- github_dark_high_contrast
   -- vim.cmd.colorscheme('kanagawa')
   -- vim.cmd.colorscheme('terafox')
-  -- vim.cmd.colorscheme('carbonfox')
-  vim.cmd.colorscheme('gruvbox')
+  -- vim.cmd.colorscheme('gruvbox')
+  -- vim.cmd.colorscheme('habamax')
+  vim.cmd.colorscheme('vscode')
 end
 
 vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#B04BD0' })
