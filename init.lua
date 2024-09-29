@@ -398,6 +398,7 @@ require('lazy').setup({
           end
           return 'make install_jsregexp'
         end)(),
+        dependencies = { 'rafamadriz/friendly-snippets' },
       },
       'saadparwaiz1/cmp_luasnip',
 
